@@ -28,6 +28,10 @@ Run the generated assembly:
      
 The ``-p`` option allows you to add Paul the psychic octopus's expert predictions in as a factor with a weight of ``0.05``.
 
+## Logs
+
+Logs are saved to ``/tmp/intl-odds-calculator.log``.
+
 # Architecture
 
 This program determines odds by:

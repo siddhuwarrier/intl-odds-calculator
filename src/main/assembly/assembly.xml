@@ -16,7 +16,14 @@
             <outputDirectory>bin</outputDirectory>
             <fileMode>0755</fileMode>
         </fileSet>
-        <!-- create empty logs directory -->
+        <fileSet>
+            <includes>
+                <include>*.csv</include>
+            </includes>
+            <directory>src/main/resources</directory>
+            <outputDirectory>etc</outputDirectory>
+            <fileMode>0755</fileMode>
+        </fileSet>
         <fileSet>
             <directory>src/main/assembly</directory>
             <outputDirectory>logs</outputDirectory>
@@ -29,10 +36,6 @@
     <files>
         <file>
             <source>src/main/resources/logback.xml</source>
-            <outputDirectory>etc</outputDirectory>
-        </file>
-        <file>
-            <source>src/main/resources/*.csv</source>
             <outputDirectory>etc</outputDirectory>
         </file>
     </files>
