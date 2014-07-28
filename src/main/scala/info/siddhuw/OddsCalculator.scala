@@ -30,7 +30,7 @@ object OddsCalculator extends App with LazyLogging {
   calculateOdds(teamOneOpt.value.get, teamTwoOpt.value.get)
 
   private def calculateOdds(teamOneName: String, teamTwoName: String) {
-    println("Calculating odds for " + teamOneName + " vs " + teamTwoName + ". Please wait...")
+    printInfoMsg(teamOneName, teamTwoName, usePsychic)
 
     val weightedProbabilities = weightedFactors.map {
       case (factor, weight) =>
@@ -41,10 +41,21 @@ object OddsCalculator extends App with LazyLogging {
     val weightedProbability = summedProbability / weightedFactors.values.sum
     logger.debug("Weighted probability: " + weightedProbability)
 
-    println("Decimal odds using two weighted factors: (a) World cup performance (0.7) and (b) performance of clubs the players belong to (0.3)")
+
+    println("Decimal odds using weighted factors: (a) World cup performance, (b) performance of clubs the players belong to (0.3)")
+
     println(teamOneName + " winning: " + 1 / weightedProbability.teamOneWin)
     println(teamTwoName + " winning: " + 1 / weightedProbability.teamTwoWin)
     println("Draw: " + 1 / weightedProbability.draw)
+  }
+
+  private def printInfoMsg(teamOneName: String, teamTwoName: String, usePsychic: Boolean) {
+    println("Calculating odds for " + teamOneName + " vs " + teamTwoName + ".")
+    val factors = "Using weighted factors: (a) World cup performance, (b) performance of clubs players belong to"
+    if (usePsychic)
+      println(factors + ", (c) Paul the Psychic Octopus (back from the dead)")
+    else
+      println(factors)
   }
 
   private def createParser: (ArgotParser, FlagOption[Boolean], SingleValueParameter[String], SingleValueParameter[String]) = {
